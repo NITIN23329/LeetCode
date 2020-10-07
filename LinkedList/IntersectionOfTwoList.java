@@ -1,21 +1,15 @@
 
 
-public class Solution {
+ppublic class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        ListNode iterA = headA,iterB=headB;
+       
         if(headA==null || headB==null)return null;
-        boolean first=true;
-        while(true){
-            if(iterA==iterB)return iterA;
-            iterA=iterA.next;
-            if(iterA==null && first){
-                iterA=headB;
-                first=false;
-            }
-            else if(iterA==null && !first) break;
-            iterB=iterB.next==null ? headA : iterB.next;
+        ListNode iterA = headA,iterB=headB;
+        while(iterA!=iterB){
+            iterA=iterA==null ? headB : iterA.next;
+            iterB=iterB==null ? headA : iterB.next;
         }
-        return null;
+        return iterA;
     }
 }
 
