@@ -40,13 +40,16 @@ class BSTIterator {
         dq = new ArrayDeque<>();
         process(root);
     }
-    
+    	//this method will put all left  nodes of tree in dq
+        
     private void process(TreeNode root){
          while(root!=null){
             dq.push(root);
             root= root.left;
         }
     }
+    // top of dq ensures that it is smallest current element .
+    // if the poped out element has right child , that needed to be processed also cuz next smallest will be the left most node of poped out node
     public int next() {
         TreeNode iter = dq.pop();
         int val = iter.val;
