@@ -46,3 +46,27 @@ class Solution {
         return res;
     }
 }
+//approach two:
+class Solution {
+    public int[] exclusiveTime(int n, List<String> logs) {
+        int[] res = new int[n];
+        int curr = 0;
+        Deque<Integer> dq = new ArrayDeque<>();
+        for(String ele : logs){
+            String[] str = ele.split(":");
+            int id = Integer.parseInt(str[0]);
+            int time = Integer.parseInt(str[2]);
+            if(str[1].charAt(0)=='s'){
+                //we will add for cases start(prev)-start(curr) or gap btw end(prev)-start(curr) processes.In both cases, process in top of stack(previous process) will execute.
+                if(!dq.isEmpty())res[dq.peek()]+=time-curr; 
+                dq.push(id);
+                curr = time;
+            }
+            else{
+                res[dq.pop()]+=time-curr+1;
+                curr = time+1;
+            }
+        }
+        return res;
+    }
+}
