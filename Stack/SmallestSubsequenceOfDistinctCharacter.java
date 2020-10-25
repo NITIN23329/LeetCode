@@ -25,3 +25,28 @@ class Solution {
     }
     
 }
+//replacing map and set with array to get less time complexity
+class Solution {
+    public String smallestSubsequence(String s) {
+        int[] map = new int[26];
+        char[] arr = s.toCharArray();
+        for(int i=0;i<arr.length;i++)map[arr[i]-'a']=i;
+        Deque<Character> dq = new ArrayDeque<>();
+        boolean[] isPresent = new boolean[26];
+        for(int i=0;i<arr.length;i++){
+            if(isPresent[arr[i]-'a'])continue;
+            while(!dq.isEmpty()){
+                if(map[dq.peek()-'a']<i)break;
+                if(dq.peek()<arr[i])break;
+                isPresent[dq.pop()-'a'] = false;
+            }
+            dq.push(arr[i]);
+            isPresent[arr[i]-'a']=true;
+                
+        }
+        StringBuilder sb = new StringBuilder();
+        while(!dq.isEmpty())sb.append(dq.pop());
+        return sb.reverse().toString();
+    }
+    
+}
