@@ -1,4 +1,4 @@
-//time O(n) , space O(n)
+//time O(n) , constant space O(26) as english alphabets are 26 only
 class Solution {
     public String smallestSubsequence(String s) {
         Map<Character,Integer> map = new HashMap<>(); //it will store last index of each character
