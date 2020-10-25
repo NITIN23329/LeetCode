@@ -2,7 +2,7 @@
 class Solution {
     public int[] exclusiveTime(int n, List<String> logs) {
         int[] res = new int[n];
-        Deque<Integer> dq = new ArrayDeque<>();//will store id time;
+        Deque<Integer> dq = new ArrayDeque<>();//will store id of process;
         int curr = 0;//time stamp
         for(int i=0;i< logs.size();i++){
             String ele = logs.get(i);
