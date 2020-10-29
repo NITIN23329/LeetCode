@@ -49,6 +49,7 @@ class Solution {
 Note: I know this solution is not intuitive...I also didn't think of this solution on first place.I came up with O(n^2) solution,
       then I took hints from youtube videos. (Not the code but some thinking).So its fine if you aren't able to solve this problem in first go. 
       If  you still not able to get it , dry run below code and you will able to it.
+ */
 class Solution {
     public int sumSubarrayMins(int[] arr) {
         int n = arr.length;
