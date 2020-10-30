@@ -38,10 +38,10 @@ class Solution {
             equal.
             1) if that previously
             seen prefix sum's index corresponds to a tiring day , our answer must include 
-            that day also.
-            2)else don't include that day in our answer and update prefix sum's index with
-            current index as previouly seen prefix sum' index is a non tiring day so we 
-            need not include that day to our result.
+            that day also. as including that will lead to (tiring - nontiring)==1
+            2)else don't include that day in our answer as excluding that will lead to (tiring-nontiring)=1 .
+            And update prefix sum's index with  current index as previouly seen prefixsum's index is a non tiring day 
+            so we should not include that day to our future calculation.
             */
             if(map.containsKey(prefix)){
                 if(hours[map.get(prefix)]>8)
