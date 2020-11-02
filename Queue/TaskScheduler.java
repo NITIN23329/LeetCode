@@ -22,18 +22,18 @@ class Solution {
         //takes O(n) time
         for(char c: map.keySet())
             pq.add(new Pair(map.get(c),c));
-        Queue<Pair> q = new LinkedList<>(); //size is  n+1 at max
+        Queue<Pair> q = new LinkedList<>(); //size is  k+1 at max
         int c=0;
         // this while block takes O(n) time in total cuz each tasks enters and exits pq exactly 1time
         while(!pq.isEmpty()){
             q.add(pq.poll());   //adding 1st element
             for(int i=0;i<k && !pq.isEmpty();i++)
-                q.add(pq.poll());           //adding n distinct elements in between to queue.
+                q.add(pq.poll());           //adding k distinct elements in between to queue.
             int z=q.size();
             while(!q.isEmpty()){
                 Pair p = q.poll();
                 p.data--;
-                if(p.data!=0)
+                if(p.data!=0)               //adding only those tasks whose freq left is >0
                     pq.add(p);
             }
             if(pq.isEmpty())c+=z;                       // if no next job left (executed last time)
