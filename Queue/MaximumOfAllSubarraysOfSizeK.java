@@ -1,4 +1,4 @@
-//# problem link : https://practice.geeksforgeeks.org/problems/maximum-of-all-subarrays-of-size-k3101/1
+#problem link : https://practice.geeksforgeeks.org/problems/maximum-of-all-subarrays-of-size-k3101/1
 //time O(N) , space O(N)
 /* approach : maintain a dq yo store index, leftMost items is the most recent item , and rightMost item is the least recent item .
 remove  from dq(remove from left to right) untill the current element is > dq elemnts from left to right.
