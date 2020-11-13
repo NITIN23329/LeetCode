@@ -1,3 +1,4 @@
+//time O(N) , space O(height)
 /* slower using String
  * but this solution is more intuitive that below one
  *approach : store the binary number(traversing from top to down in a tree) in a string 
