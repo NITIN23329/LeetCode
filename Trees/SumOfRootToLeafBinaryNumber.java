@@ -36,3 +36,16 @@ class Solution {
                         helpr(root.right,curr*2+root.val);
     }
 }
+//using bit optr of above approach
+class Solution {
+    public int sumRootToLeaf(TreeNode root) {
+      return helpr(root,0);
+    }
+    private int helpr(TreeNode root ,int curr){
+        if(root==null)return 0 ;
+        if(root.left==null && root.right==null)
+           return curr<<1 | root.val;
+        curr = curr<<1 | root.val;
+        return helpr(root.left,curr)+ helpr(root.right,curr);
+    }
+}
