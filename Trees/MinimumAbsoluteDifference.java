@@ -15,6 +15,24 @@ class Solution {
         inOrder(root.right,list);
     }
 }
+//approach : same as above instead of  list , we use prev pointer to compare consecutive nodes
+class Solution {
+    private int min;
+    private TreeNode prev;
+    public int minDiffInBST(TreeNode root) {
+        min = Integer.MAX_VALUE;
+        inOrder(root);
+        return min;
+    }
+    private void inOrder(TreeNode root){
+        if(root==null)return;
+        inOrder(root.left);
+        min = prev!=null ? Math.min(min,Math.abs(root.val-prev.val)): min;
+        prev = root;
+        inOrder(root.right);
+    }
+}
+
 //time : O(nlogn) average case , space : O(1) if we use morrish inorder else O(height)
 class Solution {
     public int getMinimumDifference(TreeNode root) {
