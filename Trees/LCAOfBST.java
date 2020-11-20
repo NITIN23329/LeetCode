@@ -7,6 +7,7 @@
 * if the root node's value is in between the 2 node's value , LCA will be root
 * if both nodes are > root  , go to right subtree
 * if both nodes are < root . go to left subree
+*#time O(height) , space O(height) , no need to stores ancestores of bot nodes 
 */
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
