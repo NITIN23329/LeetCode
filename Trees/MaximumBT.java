@@ -59,23 +59,28 @@ maintain a stack , pop while current element in greater and make it left subtree
 if stack becomes empty , current is the maximum , make it new root and previous root will be left subtree
 else add the current node to left subtree of the top stack node
 */
+
 class Solution {
     public TreeNode constructMaximumBinaryTree(int[] arr) {
         TreeNode root=null;
         Deque<TreeNode> dq = new ArrayDeque<>();
         for(int i=0;i<arr.length;i++){
-             TreeNode n = new TreeNode(arr[i]);
-            while(!dq.isEmpty() && dq.peek().val<arr[i])
-                n.left = dq.pop();
-            if(!dq.isEmpty())
-                dq.peek().right = n;
-            else{
-                n.left = root;
-                root = n;
-            }
-             dq.push(n);
+            root = insert(root,arr[i],dq);
         }
             
+        return root;
+    }
+    private TreeNode insert(TreeNode root , int x,Deque<TreeNode> dq){
+        TreeNode n = new TreeNode(x);
+        while(!dq.isEmpty() && dq.peek().val<x)
+            n.left = dq.pop();
+        if(!dq.isEmpty())
+            dq.peek().right = n;
+        else{
+            n.left = root;
+            root = n;
+        }
+         dq.push(n);
         return root;
     }
 }
