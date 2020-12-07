@@ -38,3 +38,5 @@ class FindElements {
         return set.contains(target);
     }
 }
+//approach 3: time O(height) , space(binary representation of given target) 
+//https://leetcode.com/problems/find-elements-in-a-contaminated-binary-tree/discuss/431362/Java-bit-path-Time-%3A-O(logn)
