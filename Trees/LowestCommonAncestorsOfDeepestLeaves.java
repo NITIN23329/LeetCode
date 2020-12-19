@@ -51,3 +51,47 @@ class Solution {
     
     
 }
+//time O(N) , space O(height)
+/*
+    approach :
+        -->find the total number of deepest nodes = count
+        --> for every node , check if the total # of deepest nodes known to it is = count , then the current node is a valid ancestors
+        --> among such ancestors find the lowest one. 
+        --> do post order traversal
+            --> find how much deepest nodes is known to left node and right node recursively, if the sum==count , then current node know all deepest nodes
+            --> the very first node to know all the deepest node is our answer
+            --> one corner case is if the count==1 , then the deepest node is our answer.
+*/
+class Solution {
+    private int maxH;
+    private int count;
+    private TreeNode res;
+    public TreeNode lcaDeepestLeaves(TreeNode root) {
+        count=0;maxH=0;
+        res=null;
+        findCount(root,0);
+        lca(root,0);
+        return res;
+    }
+    private void findCount(TreeNode root,int curr){
+        if(root==null)return;
+        if(curr==maxH)count++;
+        else if(curr>maxH){
+            maxH = curr;
+            count=1;
+        }
+        findCount(root.left,curr+1);
+        findCount(root.right,curr+1);
+    }
+    private int lca(TreeNode root,int curr){
+        if(root==null)return 0;
+        if(curr==maxH){
+            if(count==1)res=root;
+            return 1;
+        }
+        int x = lca(root.left,curr+1);
+        int y = lca(root.right,curr+1);
+        if(x+y==count && res==null)res=root;
+        return x+y;
+    }
+}
