@@ -1,0 +1,43 @@
+//time O(1) for insert and get_root() , O(initial tree size) for constructor
+/*
+  approach:
+    --> for a complete binary tree , (i-1)/2 represent index of parent if i = index of child
+    --> 2*i+1 is index of left child and 2*i+2 is index of right child ,if i is parent's index.
+    --> we will insert at last in an array
+    --> form an array for COMPLETE BT and store it in array
+    --> insert() will add a new Node at last position 
+*/
+class CBTInserter {
+    List<TreeNode> tree;
+    
+    public CBTInserter(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        tree = new ArrayList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            TreeNode x = q.poll();
+            tree.add(x);
+            if(x.left!=null)q.add(x.left);
+            if(x.right!=null)q.add(x.right);
+        }
+    }
+    
+    public int insert(int v) {
+        int index = tree.size();
+        TreeNode parent = tree.get((index-1)/2);
+        TreeNode child = new TreeNode(v);
+        tree.add(child);
+        if(parent.left==null)parent.left=child;
+        else parent.right = child;
+        return parent.val;
+        
+    }
+    
+    public TreeNode get_root() {
+        return tree.get(0);
+    }
+}
+    public TreeNode get_root() {
+        return map.get(0);
+    }
+}
