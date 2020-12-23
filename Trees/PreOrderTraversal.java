@@ -16,6 +16,17 @@ class Solution {
     }
 }
 // time O(N), space O(1) using morrish preorder
+/*
+
+The time complexity is actually O(N) which is a little more subtle. The outer while loop is executed O(N) iterations obviously, 
+depending on the position of root in the InOrder serialization of the tree. In each such iteration, we have to find the left predecessor for cur, 
+which is the costly part. Trivially you would think that gives us O(NlgN) per height of the tree. But if you think aggregately, you will see these:
+
+For each node, we do find left predecessor on it only twice.
+Throughout these two find left predecessor inner while loops, each edge of the tree get traversed at most twice.
+You might have to draw a tree and doodle some trace to convince yourself this. Since a tree has N-1 edges, with N as the number of nodes, 
+we know that the time complexity is O(N).
+*/
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
