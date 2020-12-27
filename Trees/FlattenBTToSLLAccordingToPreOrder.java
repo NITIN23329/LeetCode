@@ -23,10 +23,10 @@ class Solution {
     }
 }
 //time O(n) , space O(height)
-// keep hold of previously visited node, update refrence of the previous node
+// during preorder traversal , keep hold of previously visited node, update refrence of the previous node
 class Solution {
-    private TreeNode prev;
-    private TreeNode nr;
+    private TreeNode prev;      //keep hold of previously visited node
+    private TreeNode nr;        // new root
     public void flatten(TreeNode root) {
         prev = null;
         preOrder(root);
@@ -34,9 +34,9 @@ class Solution {
     }
     private void preOrder(TreeNode root){
         if(root==null)return;
-        TreeNode r=root.right;
+        TreeNode r=root.right;      //store the right node cuz, the reference will be deleted btw root and root.right due to prev.right change 
         if(prev!=null){
-            prev.right = root;
+            prev.right = root;      //updating refrence of previouly visited node
             prev.left = null;
         }else {
             nr = root;
