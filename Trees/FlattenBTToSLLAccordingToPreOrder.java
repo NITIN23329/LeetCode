@@ -22,3 +22,27 @@ class Solution {
         preOrder(root.right);
     }
 }
+//time O(n) , space O(height)
+// keep hold of previously visited node, update refrence of the previous node
+class Solution {
+    private TreeNode prev;
+    private TreeNode nr;
+    public void flatten(TreeNode root) {
+        prev = null;
+        preOrder(root);
+        root = nr;
+    }
+    private void preOrder(TreeNode root){
+        if(root==null)return;
+        TreeNode r=root.right;
+        if(prev!=null){
+            prev.right = root;
+            prev.left = null;
+        }else {
+            nr = root;
+        }
+        prev = root;
+        preOrder(root.left);
+        preOrder(r);
+    }
+}
