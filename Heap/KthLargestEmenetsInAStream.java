@@ -1,4 +1,4 @@
-// time complexity of add() is O(logn) 
+// time complexity of add() is O(logk) , constructor() is O(nlogk)
 /*  approach :
       --> maintain a min heap of size k. 
       --> min heap contains largest k elements out of n
