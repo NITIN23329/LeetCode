@@ -1,0 +1,29 @@
+//time : O(n + distinct*logk) , space O(distinct elements)
+/*  approach :
+        --> maintain a min heap according to frequency
+        --> the size of heap is k
+        --> after processing all elements , heap contains k elements with max freqency
+*/
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer,Integer> map = new HashMap<>();
+        PriorityQueue<Integer[]> pq = new PriorityQueue<>(new Comparator<>(){
+            @Override
+            public int compare(Integer[] a,Integer[] b){
+                return a[1]-b[1];
+            }
+        });
+        for(int ele :nums){
+            if(!map.containsKey(ele))map.put(ele,0);
+            map.put(ele,map.get(ele)+1);
+        }
+        for(int ele : map.keySet()){
+            pq.add(new Integer[]{ele,map.get(ele)});
+            if(pq.size()>k)pq.poll();
+        }
+        int[] res = new int[pq.size()];
+        for(int i=0;i<res.length;i++)
+             res[i] = pq.poll()[0];           
+        return res;
+    }
+}
