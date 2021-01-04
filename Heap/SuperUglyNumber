@@ -1,17 +1,12 @@
-//time : O(nklog(nk)) , 600ms
-class Solution {
+//time : O(nklog(nk)) 
+cclass Solution {
     public int nthSuperUglyNumber(int n, int[] primes) {
         PriorityQueue<Long> pq = new PriorityQueue<>();
-        Set<Long> set = new HashSet<>();
         pq.add(1L);
         while(n-->1){
-            long x = pq.poll();
-            for(int ele : primes){
-                if(!set.contains(x*ele)){
-                    pq.add(x*ele);
-                    set.add(x*ele);
-                }
-            }
+            long x = pq.peek();
+            while(!pq.isEmpty() && x==pq.peek())pq.poll();
+            for(int ele : primes)pq.add(x*ele);
         }
         return (int)(long)pq.poll();
     }
