@@ -11,9 +11,10 @@ class Solution {
         boolean[] isVisited = new boolean[n];
         PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->(a[1]-b[1]));
         pq.add(new int[]{k-1,0});
-        distance[k-1]=0;
         while(!pq.isEmpty()){
             int[] x = pq.poll();
+            if(isVisited[x[0]])continue;
+            distance[x[0]] = x[1];
             isVisited[x[0]] = true;
             for(int[] neig : adj.get(x[0])){
                 int currD = distance[x[0]]+neig[1];
