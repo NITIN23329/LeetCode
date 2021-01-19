@@ -1,4 +1,4 @@
-// time O(9*n) , at most size of n = 9 
+// time and space O(2^N) , at most size of n = 9 
 /*  approach :
      --> initially take numbers from 1,2,3...9.
      --> generate 2 new number from previous number(x). n1 = x.append(lastDigit of x + k) and n2 = x.append(lastDigit of x - k).
