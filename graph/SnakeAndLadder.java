@@ -26,35 +26,11 @@ class Solution {
         while(!q.isEmpty()){
             int[] x = q.poll();
             if(x[0]==n*n)return x[1];
-            if(x[0]+1<=n*n && !isVisited[x[0]+1]){
-                q.add(new int[]{arr[x[0]+1]==-1 ? x[0]+1 : arr[x[0]+1],x[1]+1});
-                isVisited[x[0]+1] = true;
+            for(int i=1;i<=6;i++)
+            if(x[0]+i<=n*n && !isVisited[x[0]+i]){
+                q.add(new int[]{arr[x[0]+i]==-1 ? x[0]+i : arr[x[0]+i],x[1]+1});
+                isVisited[x[0]+i] = true;
             } 
-               
-            if(x[0]+2<=n*n&& !isVisited[x[0]+2]){
-                q.add(new int[]{arr[x[0]+2]==-1 ? x[0]+2 : arr[x[0]+2],x[1]+1});
-                  isVisited[x[0]+2] = true;
-            }
-                
-            if(x[0]+3<=n*n&& !isVisited[x[0]+3]) {
-                 q.add(new int[]{arr[x[0]+3]==-1 ? x[0]+3 : arr[x[0]+3],x[1]+1});
-                 isVisited[x[0]+3] = true;
-            }
-               
-            if(x[0]+4<=n*n&& !isVisited[x[0]+4]) {
-                q.add(new int[]{arr[x[0]+4]==-1 ? x[0]+4 : arr[x[0]+4],x[1]+1});
-                   isVisited[x[0]+4] = true;
-            }
-            
-            if(x[0]+5<=n*n&& !isVisited[x[0]+5]) {
-                  q.add(new int[]{arr[x[0]+5]==-1 ? x[0]+5 : arr[x[0]+5],x[1]+1});
-                  isVisited[x[0]+5] = true;
-            }
-              
-            if(x[0]+6<=n*n&& !isVisited[x[0]+6]) {
-                 q.add(new int[]{arr[x[0]+6]==-1 ? x[0]+6 : arr[x[0]+6],x[1]+1});
-                isVisited[x[0]+6] = true;
-            }
                
         }
         return -1;
