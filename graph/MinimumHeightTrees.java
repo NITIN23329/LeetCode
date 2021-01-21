@@ -46,6 +46,7 @@ class Solution {
         3) poll from q and reduce degree of its adjancent and add all adjacent nodes having degree==1 to q
         4) the order in which bfs is done give the height of each node
         5) leaf nodes has height 0 , all neighbour node of leaf node having degree ==1 after step 2 have heights 2 and so on..
+        6) as a matter of fact, we can have atmost 2 root nodes as our result out of given graph. see :https://leetcode.com/problems/minimum-height-trees/solution/
 */
 class Solution {
     public List<Integer> findMinHeightTrees(int n, int[][] edges) {
