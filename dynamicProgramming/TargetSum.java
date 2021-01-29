@@ -1,34 +1,28 @@
-// recusive solution O(2^n)
-/*
-  --> for every index, either we can add is to current sum or we can subtact it from current sum.
-*/
-class Solution {
-    public int findTargetSumWays(int[] nums, int S) {
-        return find(0,0,S,nums);
+public class TargetSum {
+    // recursive solution , time complexity O(2^n)
+    // fore every element in nums ,either add to current sum or subtract it from current sum
+    public int recursive(int[] nums, int S) {
+        return recursiveHelpr(0,0,S,nums);
     }
-    private int find(int i,int curr,int sum,int[] nums){
-        if(i==nums.length)
-            return curr==sum? 1:0;
-        return find(i+1,curr+nums[i],sum,nums)+find(i+1,curr-nums[i],sum,nums);
+    private int recursiveHelpr(int i,int curr,int sum,int[] arr){
+        if(i==arr.length)return curr == sum ? 1 : 0;
+        return recursiveHelpr(i+1,curr+arr[i],sum,arr) + recursiveHelpr(i+1,curr-arr[i],sum,arr);
     }
-}
-// dp of above approach (memomisation) , time complexity O(n^2) we created array of size 1000*2000
-/*
-  --> as curr sum can be negative so out base index is 1000 not 0.
-*/
-class Solution {
-    public int findTargetSumWays(int[] nums, int S) {
-        int[][] dp = new int[nums.length][2000];
+    // memoization of above recursive approach , time complexity O(2*n*sum)
+    /*
+        --> since the current sum can in in range -sum to +sum , where sum is atmax 1000
+        --> create a dp array of [n][2*sum+1] size.
+        --> for i and curr , store its answer in i and curr+1000 th index to be safe from negative index.
+     */
+    public int memoization(int[] nums, int S) {
+        int[][] dp = new int[nums.length][2001];
         for(int i=0;i<nums.length;i++)
             Arrays.fill(dp[i],-1);
-        return find(0,0,S,nums,dp);
+        return memoHelpr(0,0,S,nums,dp);
     }
-    private int find(int i,int curr,int sum,int[] nums,int[][] dp){
-        if(i==nums.length)
-            return curr==sum? 1:0;
-       if(dp[i][curr+1000]==-1)
-           dp[i][curr+1000] = find(i+1,curr+nums[i],sum,nums,dp)+
-                        find(i+1,curr-nums[i],sum,nums,dp);
-        return dp[i][curr+1000];
+    private int memoHelpr(int i,int curr,int sum,int[] arr,int [][] dp){
+        if(i==arr.length)return curr == sum ? 1 : 0;
+        if(dp[i][curr+1000]!=-1) return dp[i][curr+1000];
+        return dp[i][curr+1000] = memoHelpr(i+1,curr+arr[i],sum,arr,dp) + memoHelpr(i+1,curr-arr[i],sum,arr,dp);
     }
 }
