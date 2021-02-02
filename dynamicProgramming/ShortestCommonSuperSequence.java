@@ -13,7 +13,7 @@ class Solution {
         // finding shortest common supersuquence string.
         // starting from i=n,j=m
         // if str1[i-1] == str2[j-1], it is a lcs character add str1[i-1] once and goto i-1,j-1
-        // else if dp[i-1][j]>dp[i][j-1]  , add str1[j-1] and goto i-1
+        // else if dp[i-1][j]>dp[i][j-1]  , add str1[i-1] and goto i-1
         // else add str2[j-1] and goto j-1; 
         // at last either str1 or str2 will be incompletely traversed , add all of it
          StringBuilder scs = new StringBuilder();
