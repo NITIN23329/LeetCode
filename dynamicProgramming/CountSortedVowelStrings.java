@@ -23,17 +23,15 @@ class Solution {
 // we can do this cuz all the string formed are itself sorted so no need to check for sorted string.
 class Solution {
     public int countVowelStrings(int n) {
-        char[] vowels = new char[]{'a','e','i','o','u'};
         int[][] dp = new int[n][5];
         for(int i=0;i<n;i++)Arrays.fill(dp[i],-1);
-        return recursive(0,0,vowels,n,dp);
+        return recursive(0,0,n,dp);
     }
-    private int recursive(int currLength,int start,char[] vowels,int n,int[][] dp){
+    private int recursive(int currLength,int start,int n,int[][] dp){
         if(currLength==n)return 1;
         if(start==5)return 0;
         if(dp[currLength][start]!=-1)return dp[currLength][start];
-        char ch = vowels[start];
-        return dp[currLength][start] =  recursive(currLength+1,start,vowels,n,dp) + 
-            recursive(currLength,start+1,vowels,n,dp);
+        return dp[currLength][start] =  recursive(currLength+1,start,n,dp) + 
+            recursive(currLength,start+1,n,dp);
     }
 }
