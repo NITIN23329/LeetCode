@@ -1,11 +1,11 @@
 // recursive solution
 /*
-  approach :
+  approach : here probability of cell i,j means the probability that the knight will still remains inside grid if it moves from cell i,j
     --> if we are out of grid,then probability is 0
     --> if k==0 , then we are out of moves while we are still inside grid hence probability is 1
     -->instead of finding probability of current step from previous step , we will do reverse of it I.e. we will find current probability from next probability.
     --> suppose when k reaches 0 and still we are inside grid at cell i,j , then probability of all 8 cells from which we reaches cell i,j is 1/8 and so on.
-    --> as we have 8 possibilites to go from current cell, then the current probability += next probability/8
+    --> as we have 8 possibilites to go from current cell to next cell, then the current probability += next probability/8
 */
 class Solution {
     public double knightProbability(int N, int K, int r, int c) {
