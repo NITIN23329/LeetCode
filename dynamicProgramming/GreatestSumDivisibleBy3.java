@@ -27,3 +27,35 @@ class Solution {
     }
     
 }
+// recursive solution time and space O(n)
+/*
+   --> to find  longest sum when dividedy by 3 leaves remainder 0 , 1 and 2 for n, we will use the longest sum when dividedy by 3 leaves remainder 0 , 1 and 2 for n-1
+   --> try out all possible combiantions of nums[i] with longest sum when dividedy by 3 leaves remainder 0 , 1 and 2 for n-1.
+   --> if we don't find longest sum when dividedy by 3 leaves remainder 0 , 1 and 2  return -1
+*/
+class Solution {
+    public int maxSumDivThree(int[] nums) {
+        return Math.max(0,memoHelper(nums,0)[0]);
+    }
+    private int[] memoHelper(int[] nums,int i){
+        if(i==nums.length)return new int[]{-1,-1,-1};
+        int[] next = memoHelper(nums,i+1);
+        int[] curr = new int[3];
+        if(nums[i]%3==1){
+            curr[1] = next[0]==-1 ? Math.max(next[1],nums[i]) : Math.max(next[1],next[0]+nums[i]);
+            curr[0] = next[2]==-1 ? next[0] : Math.max(next[0],next[2]+nums[i]);
+            curr[2] = next[1]==-1 ? next[2] : Math.max(next[2],next[1]+nums[i]);
+        }
+        else if(nums[i]%3==2){
+            curr[2] = next[0]==-1? Math.max(next[2],nums[i]) : Math.max(next[2],next[0]+nums[i]);
+            curr[1] = next[2]==-1? next[1] : Math.max(next[1],next[2]+nums[i]);
+            curr[0] = next[1]==-1? next[0] : Math.max(next[0],next[1]+nums[i]);
+        }
+        else{
+            curr[0] = next[0]==-1? nums[i] : next[0]+nums[i];
+            curr[1] = next[1]==-1 ? -1 : next[1]+nums[i];
+            curr[2] = next[2]==-1 ? -1 : next[2]+nums[i];
+        }
+        return curr;
+    }
+}
