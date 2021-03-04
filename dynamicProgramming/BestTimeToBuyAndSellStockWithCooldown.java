@@ -47,3 +47,25 @@ class Solution {
         return dp[n-1];
     }
 }
+// time and space complexity O(n)
+/*  
+  approach : using FSM
+      --> not very intuitive
+      --> explanation of approach : https://www.youtube.com/watch?v=4wNXkhAky3s
+*/
+class Solution {
+    public int maxProfit(int[] prices) {
+        int n = prices.length;
+        if(n==0)return 0;
+        int[] buy = new int[n];
+        int[] sell = new int[n];
+        int[] nothing = new int[n];
+        buy[0] = - prices[0];
+        for(int day=1;day<n;day++){
+            buy[day] = Math.max(nothing[day-1]-prices[day],buy[day-1]);
+            nothing[day] = Math.max(sell[day-1],nothing[day-1]);
+            sell[day] = buy[day-1] + prices[day];
+        }
+        return Math.max(sell[n-1],nothing[n-1]);
+    }
+}
