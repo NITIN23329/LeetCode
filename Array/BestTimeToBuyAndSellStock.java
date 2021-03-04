@@ -14,7 +14,8 @@ class Solution {
 }
 // time and space complexity : O(n) , although space complexity can be reduced to O(1)
 // Done via FSM or state transistions . Note : most stock buy and sell problem can be done with FSM state transistion
-// FSM diagram ![FSM1](https://user-images.githubusercontent.com/55681638/109992718-8dc06d80-7d31-11eb-9073-5bd77378afad.jpg)
+// FSM diagram ## https://user-images.githubusercontent.com/55681638/109992718-8dc06d80-7d31-11eb-9073-5bd77378afad.jpg
+
 
 class Solution {
     public int maxProfit(int[] prices) {
