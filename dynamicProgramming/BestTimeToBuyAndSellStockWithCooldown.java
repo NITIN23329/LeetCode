@@ -52,6 +52,7 @@ class Solution {
   approach : using FSM
       --> not very intuitive
       --> explanation of approach : https://www.youtube.com/watch?v=4wNXkhAky3s
+      --> FSM diagram : https://user-images.githubusercontent.com/55681638/109999519-51dcd680-7d38-11eb-895b-2ecd9141f1fb.jpg
 */
 class Solution {
     public int maxProfit(int[] prices) {
