@@ -21,6 +21,7 @@ class Solution {
     }
 }
 // memoization of above recursive soltuion with time and space complexity O(nm)
+// note that the initiallisation is done with 1 as need is always <=0.
 class Solution {
     public int calculateMinimumHP(int[][] dungeon) {
         int m = dungeon[0].length;
