@@ -23,26 +23,23 @@ class Solution {
         return res;
     }
 }
-// dp of above recursive solution [ACCEPTED]
+// time complexity O(n^2) and space complexity O(n)
+// we can observe that the BST with node value [5,6,7] and [1,2,3] is same
+// actually l....r value does not matter , what matter is the interval i.e. r-l
+// for a particular i in range 1 to n ,consider i as root node, find # of ways to create left subtree(1..i-1) ,find # of ways to create right subtree(i+1...n)
+// total # of ways to create BST with i as root node = # of left subtree * # of right subtree
 class Solution {
     public int numTrees(int n) {
-        int[][] dp=new int[n+2][n+2];
-        for(int i=0;i<n+2;i++)
-            for(int j=0;j<n+2;j++)dp[i][j]=-1;
-         return find(1,n,dp);
+        int[] dp = new int[n+1];
+        Arrays.fill(dp,-1);
+        return memoHelper(n,dp);
     }
-    private int find(int l,int r,int[][] dp){
-        if(l>r)return 1;
-        int res=0;
-        for(int i=l;i<=r;i++){
-            if(dp[l][i-1]==-1)
-                dp[l][i-1] = find(l,i-1,dp);
-            int left = dp[l][i-1];
-            if(dp[i+1][r]==-1)
-                dp[i+1][r]=find(i+1,r,dp);
-            int right = dp[i+1][r];
-            res+=left*right;
-        }
-        return res;
+    private int memoHelper(int n,int[] dp){
+        if(n==0)return 1;
+        if(dp[n]!=-1)return dp[n];
+        int ans = 0;
+        for(int i=1;i<=n;i++)
+            ans+= memoHelper(i-1,dp) * memoHelper(n-i,dp);
+        return dp[n] = ans;
     }
 }
