@@ -1,6 +1,6 @@
 // time and space complexity : O(n) , however, space complexity can be reduced to O(1)
 /*
-    approach : this problem is similar to house robber 1 link : https://leetcode.com/problems/house-robber/
+    approach : this problem is similar to house robber 1 link : https://github.com/NITIN23329/LeetCode/blob/dde408d153bed1e02f2c5d3bd524abd16ff00c3c/dynamicProgramming/HouseRobber.java#L9
     --> one thing obvious is that if we rob house 0 , we cann't rob house n-1 and if we don't rob house 0 , we will rob house at n-1
     --> so first search space will be from 0 to n-2(excluding last house but including first house)
     --> and the second search space will be from 1 to n-1(including last house but excluding first house)
