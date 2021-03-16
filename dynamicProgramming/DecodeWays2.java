@@ -51,3 +51,43 @@ class Solution {
         return dp[i] = ans;
     }
 }
+// bottom up dp with time complexity O(n) and space compelxity : O(1)
+class Solution {
+    public int numDecodings(String s) {
+        int n =s.length();
+        int mod = (int)1e9+7;
+        long i_plus_1 = 1;
+        long i_plus_2 = 0;
+        long ans = 0L;
+        for(int i=n-1;i>=0;i--){
+            char curr = s.charAt(i);
+            ans = 0L;
+            if(curr=='0'){
+                i_plus_2 = i_plus_1;
+                i_plus_1 = 0;
+                continue;
+            }
+            if(curr=='*')ans = (ans +  9 * i_plus_1)%mod;
+            else ans = (ans + i_plus_1)%mod;
+            if(i+1<n && (curr=='*'|| curr=='1' || curr=='2')){
+                char next = s.charAt(i+1);
+                if(curr=='*'){
+                    if(next == '*')ans = (ans +  15 * i_plus_2)%mod;
+                    else if(next <='6')ans = (ans +  2 * i_plus_2)%mod;
+                    else ans = (ans +  i_plus_2)%mod;
+                }
+                else if(next=='*'){
+                    if(curr=='2') ans = (ans +  6*i_plus_2)%mod;
+                    else ans = (ans +  9 * i_plus_2)%mod;
+                }
+                else {
+                    if(curr=='2' && next <='6') ans = (ans +  i_plus_2)%mod;
+                    if(curr=='1') ans = (ans + i_plus_2)%mod;
+                }
+            }
+            i_plus_2 = i_plus_1;
+            i_plus_1 = ans;
+        }
+        return (int)ans;
+    }
+}
