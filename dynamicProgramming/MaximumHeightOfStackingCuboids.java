@@ -3,6 +3,8 @@
   approch : variation of LIS
   --> let say cuboid[i] = {length,breadth,height}.
   --> As we need to maximise our heigth, we will take height of a cuboid as max(length,breadth,height) for all cuboids.
+    --> Why this is correct? Take 2 cuboids A and B, such that A can be placed over B.
+    --> Then we rearrange B such that we get max Height for B. Now we can rearrange A the same way we did B and hence A can be always placed over B.
   --> Next we need to sort cuboids in increasing order of height, if same height then increasing order of breadth, if same breadth even then increasing order of height.
   --> Find LIS such that left,breadth and height of cuboid[j] < = left,breadth and height of cuboid[i].
 */
