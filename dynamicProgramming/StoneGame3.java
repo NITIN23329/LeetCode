@@ -23,10 +23,13 @@ class Solution {
     }
     private int aliceHelper(int[] arr,int i,int n){
         if(i>=n)return 0;
-        int c1 = arr[i] + bobHelper(arr,i+1);
-        int c2 = arr[i]+ (i+1>=n?0:arr[i+1]) + bobHelper(arr,i+2);
-        int c3 = arr[i] +  (i+1>=n?0:arr[i+1]) +  (i+2>=n?0:arr[i+2]) + bobHelper(arr,i+3);
-        return Math.max(c1,Math.max(c2,c3));
+        int max = Integer.MIN_VALUE;
+        int cumulative = 0;
+        for(int x=i;x<Math.min(n,i+3);x++){
+            cumulative+=arr[x];
+            max = Math.max(max,cumulative + bobHelper(arr,x+1));
+        }
+        return max;
         
     }
     private int bobHelper(int[] arr,int i){
@@ -54,10 +57,13 @@ class Solution {
     private int aliceHelper(int[] arr,int i,int n){
         if(i>=n)return 0;
         if(dp[i]!=-1)return dp[i];
-        int c1 = arr[i] + bobHelper(arr,i+1);
-        int c2 = arr[i]+ (i+1>=n?0:arr[i+1]) + bobHelper(arr,i+2);
-        int c3 = arr[i] +  (i+1>=n?0:arr[i+1]) +  (i+2>=n?0:arr[i+2]) + bobHelper(arr,i+3);
-        return dp[i] = Math.max(c1,Math.max(c2,c3));
+        int max = Integer.MIN_VALUE;
+        int cumulative = 0;
+        for(int x=i;x<Math.min(n,i+3);x++){
+            cumulative+=arr[x];
+            max = Math.max(max,cumulative + bobHelper(arr,x+1));
+        }
+        return dp[i] = max;
         
     }
     private int bobHelper(int[] arr,int i){
