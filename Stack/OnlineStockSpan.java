@@ -1,18 +1,19 @@
+/*  --> O(1) amortized time complexity 
+    --> if we simply find the # of days with price <= current price using the greater on right techinque , 
+            the we gonna loose the information for future days as we will pop days with smaller prices in current day.
+    --> Hence, for each day, along with the price we are gonna store the #of days where price is <=  for current day price 
+        as well so that further calls will remeber the previously popped prices.
+*/
 class StockSpanner {
-    ArrayList<Integer> list;
-    Deque<Integer> index;
-    int c;
+    Deque<int[]> dq;
     public StockSpanner() {
-        index = new ArrayDeque<>();
-        int c=0;
-        list = new ArrayList<>();
+         dq = new ArrayDeque<>();
     }
     
     public int next(int price) {
-        while(!index.isEmpty() && list.get(index.peek())<=price)index.pop();
-        int ans = index.isEmpty() ? list.size()+1 : list.size()-index.peek();
-        list.add(price);
-        index.push(c++);
-        return ans;
+        int count = 1;
+        while(!dq.isEmpty() && dq.peek()[0]<=price)count+=dq.pop()[1];
+        dq.push(new int[]{price,count});
+        return count;
     }
 }
