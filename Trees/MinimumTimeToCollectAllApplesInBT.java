@@ -2,36 +2,32 @@
 //time O(n) , space O(height)
 /*  approach :
       -->the first thing comes in mind is to do a dfs
-      --> in dfs we need to return 2 things , answer of current node and whether current nodes sees in apple down or not.
-      --> starting from a current node how we will calculate time ?
-      --> find sum of time of all childeren , 
-      -->if any childeren got apple or current node has apple, we will add 2 to our result to find time for current node's parent.
-      -->one corner case is that for the root node , we will add 2 extra which needed to be removed from our answer,if there is any apple present in tree
+      --> In dfs, we will visit a node only if the subtree starting from that node has some apples.
+      --> if a subtree starting from a node has apple, then we are gonna come from parent node to the that node and go back to parent node. Hence add 2 to answer.
+      --> Node the root node dont need to add a 2 cuz its the starting node .
 */
 class Solution {
+    int ans = 0;
     public int minTime(int n, int[][] edges, List<Boolean> hasApple) {
-        List<List<Integer>> adj = new ArrayList<>();
-        for(int i=0;i<n;i++)adj.add(new ArrayList<>());
-        for(int[] ele : edges){
-            int x = ele[0];int y = ele[1];
-            adj.get(x).add(y);
-            adj.get(y).add(x);
+        ArrayList<Integer>[] tree = new ArrayList[n];
+        for(int i=0;i<n;i++)tree[i] = new ArrayList<>();
+        for(int[] edge : edges){
+            int x = edge[0];
+            int y = edge[1];
+            tree[x].add(y);
+            tree[y].add(x);
         }
-        int[] res = dfs(adj,0,hasApple,new boolean[n]);
-        if(res[1]==1)res[0]-=2;
-        return res[0];
+        dfs(0,-1,hasApple,tree);
+        return ans;
     }
-    private int[] dfs(List<List<Integer>> adj,int curr,List<Boolean> hasApple,boolean[] visited){
-        if(visited[curr])return new int[]{0,0};
-        visited[curr] = true;
-        int[]  res= new int[]{0,0};
-        for(int neig: adj.get(curr)){
-            int[] x = dfs(adj,neig,hasApple,visited);
-            res[0]+=x[0];if(x[1]==1)res[1]=1;
+    private boolean dfs(int curr,int parent,List<Boolean> hasApple,ArrayList<Integer>[] tree){
+        boolean hasAppleInSubtree = hasApple.get(curr);     // check if current node has apple or not.
+        for(int neig : tree[curr]){
+            if(neig == parent)continue;
+            hasAppleInSubtree |= dfs(neig,curr,hasApple,tree);    // check if any subtree of current node has apple or not
         }
-        if(hasApple.get(curr) || res[1]==1){
-            res[0]+=2;res[1]=1;
-        }
-        return res;
+        if(hasAppleInSubtree && curr!=0)  // if any subtree starting from current node have some apples, then we are gonna come to  the current node and go back
+            ans+=2;     // so add 2 .
+        return hasAppleInSubtree;   // indicate we wanna also visit its parent if true.
     }
 }
