@@ -38,3 +38,30 @@ class Solution {
         find(root.right,x+1,y+1);
     }
 }
+// another short solution using sorted TreeMap
+
+class Solution {
+    TreeMap<Integer,TreeMap<Integer,List<Integer>>> map = new TreeMap<>();
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        traverse(root,0,0);
+        for(int col : map.keySet()){
+            List<Integer> arr = new ArrayList<>();
+            for(int row : map.get(col).keySet()){
+                List<Integer> curr = map.get(col).get(row);
+                Collections.sort(curr);
+                arr.addAll(curr);
+            }
+            res.add(arr);
+        }
+        return res;
+    }
+    private void traverse(TreeNode root,int row,int col){
+        if(root == null)return;
+        if(!map.containsKey(col))map.put(col,new TreeMap<>());
+        if(!map.get(col).containsKey(row))map.get(col).put(row,new ArrayList<>());
+        map.get(col).get(row).add(root.val);
+        traverse(root.left,row+1,col-1);
+        traverse(root.right,row+1,col+1);
+    }
+}
